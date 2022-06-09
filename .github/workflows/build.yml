@@ -23,20 +23,20 @@ jobs:
               rm -rf /var/lib/apt/lists/*
       
       - name: Clone
-        work-directory: ../
+        working-directory: ../
         run: git clone git@github.com:RPi-Distro/pi-gen.git
 
       - name: Disable stage 3, 4 & 5
-        work-directory: ../pi-gen 
+        working-directory: ../pi-gen 
         run: |
           touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
           touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
       - name: Copy config
-        work-directory: ../pi-gen 
+        working-directory: ../pi-gen 
         run: ../pi-gen_stage4.5-cutiepi/config ./config
 
       - name: Run build
-        work-directory: ../pi-gen 
+        working-directory: ../pi-gen 
         run: ./build.sh
         
