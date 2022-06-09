@@ -1,12 +1,12 @@
 on: [push]
-name: Production
+name: build image
 
 env:
   DEBIAN_FRONTEND: noninteractive
   
 jobs:
-  deploy:
-    runs-on: debian:bullseye
+  build:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout branch
