@@ -34,7 +34,7 @@ jobs:
 
       - name: Copy config
         working-directory: ../pi-gen 
-        run: ../pi-gen_stage4.5-cutiepi/config ./config
+        run: mv ../pi-gen_stage4.5-cutiepi/config ./config
 
       - name: Run build
         working-directory: ../pi-gen 
