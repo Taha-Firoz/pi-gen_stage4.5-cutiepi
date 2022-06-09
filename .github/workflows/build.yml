@@ -12,37 +12,31 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@master
 
-      - name: List directory
-        run: ls
-
-      - name: List parent directory
-        run: ls ../
-
-      - name: List parent parent directory
-        run: ls ../../
-
-      - name: List parent parent parent directory
-        run: ls ../../../
-
-      # - name: Install dependencies
-      #   run: |
-      #       apt-get -y update && \
-      #       apt-get -y install --no-install-recommends \
-      #         git vim parted \
-      #         quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
-      #         libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
-      #         binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
-      #         rm -rf /var/lib/apt/lists/*
+      - name: Install dependencies
+        run: |
+            apt-get -y update && \
+            apt-get -y install --no-install-recommends \
+              git vim parted \
+              quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
+              libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
+              binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
+              rm -rf /var/lib/apt/lists/*
       
-      # - name: Clone
-      #   run: git clone git@github.com:RPi-Distro/pi-gen.git
+      - name: Clone
+        work-directory: ../
+        run: git clone git@github.com:RPi-Distro/pi-gen.git
 
-      # - name: Disable stage 3, 4 & 5
-      #   work-directory: /pi-gen 
-      #   run: |
-      #     touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
-      #     touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
+      - name: Disable stage 3, 4 & 5
+        work-directory: ../pi-gen 
+        run: |
+          touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
+          touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
-      # - name: Copy config
-      #   work-directory: /pi-gen 
-      #   run: mv /pi-gen_stage4.5-cutiepi/config ./config
+      - name: Copy config
+        work-directory: ../pi-gen 
+        run: ../pi-gen_stage4.5-cutiepi/config ./config
+
+      - name: Run build
+        work-directory: ../pi-gen 
+        run: ./build.sh
+        
