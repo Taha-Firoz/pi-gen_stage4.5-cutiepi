@@ -14,13 +14,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-            apt-get -y update && \
-            apt-get -y install --no-install-recommends \
+            sudo apt -y update && \
+            sudo apt -y install --no-install-recommends \
               git vim parted \
               quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
               libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
               binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
-              rm -rf /var/lib/apt/lists/*
+              sudo rm -rf /var/lib/apt/lists/*
       
       - name: Clone
         working-directory: ../
@@ -38,5 +38,5 @@ jobs:
 
       - name: Run build
         working-directory: ../pi-gen 
-        run: ./build.sh
+        run: sudo ./build.sh
         
