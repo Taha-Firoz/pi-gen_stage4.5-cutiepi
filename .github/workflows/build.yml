@@ -21,6 +21,9 @@ jobs:
       - name: List parent parent directory
         run: ls ../../
 
+      - name: List parent parent parent directory
+        run: ls ../../../
+
       # - name: Install dependencies
       #   run: |
       #       apt-get -y update && \
