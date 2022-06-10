@@ -2,4 +2,3 @@
 02-wpa_supplicant_service.diff
 03-sysctl.diff
 04-limits.diff
-06-autostart.diff
