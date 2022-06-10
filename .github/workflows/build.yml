@@ -32,9 +32,9 @@ jobs:
           touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
           touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
-      - name: Copy config
+      - name: Copy stage 4.5
         working-directory: ../pi-gen 
-        run: mv ../pi-gen_stage4.5-cutiepi/config ./config
+        run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
 
       - name: Run build
         working-directory: ../pi-gen 
