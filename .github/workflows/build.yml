@@ -12,36 +12,58 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@master
 
-      - name: Install dependencies
+      - name: Make Random file
+        run: echo "Some big artifact" > file.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: file.txt
+
+      - name: Make dir
         run: |
-            sudo apt -y update && \
-            sudo apt -y install --no-install-recommends \
-              git vim parted \
-              quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
-              libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
-              binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
-              sudo rm -rf /var/lib/apt/lists/*
+          mkdir artifacts
+          echo "Some big artifact 1" > artifacts/file1.txt
+          echo "Some big artifact 2" > artifacts/file2.txt
+          echo "Some big artifact 3" > artifacts/file3.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact-dir
+          path: artifacts
+
+
+
+      # - name: Install dependencies
+      #   run: |
+      #       sudo apt -y update && \
+      #       sudo apt -y install --no-install-recommends \
+      #         git vim parted \
+      #         quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
+      #         libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
+      #         binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
+      #         sudo rm -rf /var/lib/apt/lists/*
       
-      - name: Clone
-        working-directory: ../
-        run: git clone https://github.com/RPi-Distro/pi-gen.git -b arm64
+      # - name: Clone
+      #   working-directory: ../
+      #   run: git clone https://github.com/RPi-Distro/pi-gen.git -b arm64
 
-      - name: Disable stage 3, 4 & 5
-        working-directory: ../pi-gen 
-        run: |
-          touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
-          touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
+      # - name: Disable stage 3, 4 & 5
+      #   working-directory: ../pi-gen 
+      #   run: |
+      #     touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
+      #     touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
-      - name: Copy stage 4.5
-        working-directory: ../pi-gen 
-        run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
+      # - name: Copy stage 4.5
+      #   working-directory: ../pi-gen 
+      #   run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
 
-      - name: Run build
-        working-directory: ../pi-gen 
-        run: sudo ./build.sh
+      # - name: Run build
+      #   working-directory: ../pi-gen 
+      #   run: sudo ./build.sh
       
-      - name: Show directoryies
-        working-directory: ../pi-gen 
-        run: |
-          ls 
-          ls ./deploy
+      # - name: Show directoryies
+      #   working-directory: ../pi-gen 
+      #   run: |
+      #     ls 
+      #     ls ./deploy
