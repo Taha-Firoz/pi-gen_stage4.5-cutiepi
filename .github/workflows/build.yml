@@ -50,16 +50,15 @@ jobs:
         run: tar -czvf image_build.tar.gz -C deploy .
 
       - uses: actions/upload-artifact@v3
-        working-directory: ../pi-gen 
+        working-directory: 
         with:
           name: ${{env.IMAGE_NAME}}
-          path: config
+          path: ../pi-gen/config
 
       - uses: actions/upload-artifact@v3
-        working-directory: ../pi-gen 
         with:
           name: release
-          path: image_build.tar.gz
+          path: ../pi-gen/image_build.tar.gz
 
       - name: Show directories
         working-directory: ../pi-gen 
