@@ -42,7 +42,7 @@ jobs:
         run: sudo ./build.sh
 
       - name: Get Image Name
-        working-directory: ../pi-dgen
+        working-directory: ../pi-gen
         run: echo "IMAGE_NAME={$(cat config | grep IMG_NAME | sed -e 's#.*=\(\)#\1#')}" >> $GITHUB_ENV
 
       - name: Make Tarball
