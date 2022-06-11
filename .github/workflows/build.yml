@@ -13,11 +13,6 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@master
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{env.IMAGE_NAME}}
-          path: ../pi-gen/config
-
       - name: Install dependencies
         run: |
             sudo apt -y update && \
