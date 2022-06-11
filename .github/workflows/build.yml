@@ -41,13 +41,28 @@ jobs:
         working-directory: ../pi-gen 
         run: sudo ./build.sh
 
-      # - name: Built image
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: 
-      #     path: artifacts
+      - name: Get Image Name
+        working-directory: ../pi-dgen
+        run: echo "IMAGE_NAME={$(cat config | grep IMG_NAME | sed -e 's#.*=\(\)#\1#')}" >> $GITHUB_ENV
 
-      
+      - name: Make Tarball
+        working-directory: ../pi-gen
+        run: tar -czvf image_build.tar.gz -C deploy .
+
+      - name: Test artifact with env
+        working-directory: ../pi-gen 
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{env.IMAGE_NAME}}
+          path: config
+
+      - name: Store image artifact
+        working-directory: ../pi-gen 
+        uses: actions/upload-artifact@v3
+        with:
+          name: release
+          path: image_build.tar.gz
+
       - name: Show directories
         working-directory: ../pi-gen 
         run: ls -la
