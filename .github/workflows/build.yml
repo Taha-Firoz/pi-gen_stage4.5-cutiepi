@@ -46,7 +46,8 @@ jobs:
         run: echo "IMAGE_NAME={$(cat config | grep IMG_NAME | sed -e 's#.*=\(\)#\1#')}" >> $GITHUB_ENV
 
       - name: Make Tarball
-        run: tar -czvf image_build.tar.gz ../pi-gen/deploy/*
+        working-directory: ../pi-gen/deploy
+        run: tar -czvf ../../pi-gen_stage4.5-cutiepi/image_build.tar.gz *
 
       - uses: actions/upload-artifact@v3
         with:
