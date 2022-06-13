@@ -22,7 +22,6 @@ rm -f "${ROOTFS_DIR}/etc/wpa_supplicant/wpa_supplicant.conf"
 sed -i 's/console=serial0,115200 //'		"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/quiet //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
-sed -i 's/ignore-serial-consoles/ignore-serial-consoles video=HDMI-A-2:D video=DSI-1:800x1280@60/'	"${ROOTFS_DIR}/boot/cmdline.txt"
 
 tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
