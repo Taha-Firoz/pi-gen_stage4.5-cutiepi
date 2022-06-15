@@ -1,0 +1,57 @@
+on: [push]
+name: build image 10-inch
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout branch
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: |
+            sudo apt -y update && \
+            sudo apt -y install --no-install-recommends \
+              git vim parted \
+              quilt coreutils qemu-user-static debootstrap zerofree zip dosfstools \
+              libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
+              binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz && \
+              sudo rm -rf /var/lib/apt/lists/*
+      
+      - name: Clone
+        working-directory: ../
+        run: git clone https://github.com/RPi-Distro/pi-gen.git -b arm64
+
+      - name: Copy stage 4.5
+        working-directory: ../pi-gen 
+        run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
+
+      - name: Run build
+        working-directory: ../pi-gen 
+        run: sudo ./build.sh
+
+      - name: Make Tarball
+        working-directory: ../pi-gen/deploy
+        run: tar -czvf ../../pi-gen_stage4.5-cutiepi/image_build.tar.gz *
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release
+          path: image_build.tar.gz
+
+      - name: Show directories
+        working-directory: ../pi-gen 
+        run: ls -la
+
+      - name: Show deploy
+        working-directory: ../pi-gen 
+        run: ls -la deploy
+
+      - name: Show deploy pi
+        working-directory: ../pi-gen 
+        run: ls -la deploy/raspios-cutiepi-lite 
