@@ -25,7 +25,7 @@ jobs:
       
       - name: Clone
         working-directory: ../
-        run: git clone https://github.com/RPi-Distro/pi-gen.git -b arm64
+        run: git clone https://github.com/Taha-Firoz/pi-gen.git -b arm64-lite
 
       - name: Disable stage 3, 4 & 5
         working-directory: ../pi-gen 
