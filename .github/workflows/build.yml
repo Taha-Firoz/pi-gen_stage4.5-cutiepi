@@ -41,27 +41,15 @@ jobs:
         working-directory: ../pi-gen 
         run: sudo ./build.sh
 
-      - name: Get Image Name
-        working-directory: ../pi-gen
-        run: echo "IMAGE_NAME={$(cat config | grep IMG_NAME | sed -e 's#.*=\(\)#\1#')}" >> $GITHUB_ENV
+      # - name: Make Tarball
+      #   working-directory: ../pi-gen/deploy
+      #   run: tar -czvf ../../pi-gen_stage4.5-cutiepi/image_build.tar.gz *.img.xz
 
-      - name: Make Tarball
+      - name: Run build
         working-directory: ../pi-gen/deploy
-        run: tar -czvf ../../pi-gen_stage4.5-cutiepi/image_build.tar.gz *
+        run: mv *.img.xz ../../pi-gen_stage4.5-cutiepi/image_build.img.xz
 
       - uses: actions/upload-artifact@v3
         with:
           name: release
-          path: image_build.tar.gz
-
-      - name: Show directories
-        working-directory: ../pi-gen 
-        run: ls -la
-
-      - name: Show deploy
-        working-directory: ../pi-gen 
-        run: ls -la deploy
-
-      - name: Show deploy pi
-        working-directory: ../pi-gen 
-        run: ls -la deploy/raspios-cutiepi-lite 
+          path: image_build.img.xz
