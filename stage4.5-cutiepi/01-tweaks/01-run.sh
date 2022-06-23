@@ -18,7 +18,6 @@ tar xvpf files/panel-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 tar xvpf files/dconf-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 
 rm -f "${ROOTFS_DIR}/etc/wpa_supplicant/wpa_supplicant.conf"
-rm -f "${ROOTFS_DIR}/etc/xdg/autostart/piwiz.desktop"
 
 sed -i 's/console=serial0,115200 //'		"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/quiet //'				"${ROOTFS_DIR}/boot/cmdline.txt"
