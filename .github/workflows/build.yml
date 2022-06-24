@@ -47,7 +47,7 @@ jobs:
 
       - name: Run build
         working-directory: ../pi-gen/deploy
-        run: mv *.img.xz ../../pi-gen_stage4.5-cutiepi/image_build.img.xz
+        run: sudo mv *.img.xz ../../pi-gen_stage4.5-cutiepi/image_build.img.xz
 
       - uses: actions/upload-artifact@v3
         with:
