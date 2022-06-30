@@ -6,6 +6,10 @@ for GRP in video input render; do
 done
 EOF
 
+on_chroot << EOF
+  SUDO_USER="${FIRST_USER_NAME}" raspi-config nonint do_boot_behaviour B2
+EOF
+
 install -m 644 files/backlight.rules 		"${ROOTFS_DIR}/etc/udev/rules.d/"
 
 install -m 644 files/dt-blob.bin 		"${ROOTFS_DIR}/boot/"
