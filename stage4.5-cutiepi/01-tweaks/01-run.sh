@@ -45,5 +45,5 @@ EOF
 
 on_chroot << EOF
 systemctl daemon-reload
-systemctl enable --now firoz.shell.service
+systemctl enable firoz.shell.service
 EOF
