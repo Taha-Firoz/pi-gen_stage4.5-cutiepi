@@ -18,6 +18,12 @@ install -m 644 files/*.dtbo 			"${ROOTFS_DIR}/boot/overlays/"
 install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
+# Install service file
+install -m 755 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
+# Create directories
+mkdir -p "${ROOTFS_DIR}/opt/Firoz/shell"
+tar xvpf files/firoz-shell.tar.gz -C 		"${ROOTFS_DIR}/opt/Firoz/shell"
+
 tar xvpf files/panel-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 tar xvpf files/dconf-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 
@@ -34,4 +40,10 @@ on_chroot <<EOF
 dkms add -m panel-ilitek-ili9881c/1.0
 dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
 dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
+EOF
+
+
+on_chroot << EOF
+systemctl daemon-reload
+systemctl enable --now firoz.shell.service
 EOF
