@@ -33,6 +33,12 @@ sed -i 's/console=serial0,115200 //'		"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/quiet //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 
+# Disables hdmi on rpi
+tar xvf files/vc4-1.0.tgz -C "${ROOTFS_DIR}/"
+on_chroot <<EOF
+dkms add -m vc4/1.0
+dkms install -m vc4/1.0
+EOF
 
 # # Uncomment to get 10 inch display drivers loaded
 # tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
