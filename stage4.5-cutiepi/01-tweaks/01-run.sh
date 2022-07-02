@@ -19,7 +19,7 @@ install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
 # Install service file
-install -m 755 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
+install -m 444 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
 # Create directories
 mkdir -p "${ROOTFS_DIR}/opt/Firoz/shell"
 tar xvpf files/firoz-shell.tar.gz -C 		"${ROOTFS_DIR}/opt/Firoz/shell"
