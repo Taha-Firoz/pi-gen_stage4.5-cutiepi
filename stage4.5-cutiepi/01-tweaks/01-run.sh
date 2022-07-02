@@ -38,13 +38,13 @@ dkms add -m vc4/1.0
 dkms install -m vc4/1.0 -k 5.15.32-v8+
 EOF
 
-# # Uncomment to get 10 inch display drivers loaded
-# tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
-# on_chroot <<EOF
-# dkms add -m panel-ilitek-ili9881c/1.0
-# dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
-# dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
-# EOF
+# Uncomment to get 10 inch display drivers loaded
+tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
+on_chroot <<EOF
+dkms add -m panel-ilitek-ili9881c/1.0
+dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
+dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
+EOF
 
 
 on_chroot << EOF
