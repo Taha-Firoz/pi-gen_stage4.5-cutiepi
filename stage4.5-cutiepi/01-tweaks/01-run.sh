@@ -20,9 +20,7 @@ install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
 # Install service file
 install -m 444 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
-# Create directories
-mkdir -p "${ROOTFS_DIR}/opt/Firoz/shell"
-tar xvpf files/firoz-shell.tar.gz -C 		"${ROOTFS_DIR}/opt/Firoz/shell"
+tar xvpf files/firoz_shell.tar.gz -C "${ROOTFS_DIR}/"
 
 tar xvpf files/panel-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 tar xvpf files/dconf-config.tgz -C 		"${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
