@@ -44,6 +44,5 @@ sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 
 
 on_chroot << EOF
-chmod a+x "${ROOTFS_DIR}/opt/Firoz/shell/firoz_shell"
 systemctl enable firoz.shell.service
 EOF
