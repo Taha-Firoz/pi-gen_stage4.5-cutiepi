@@ -34,16 +34,16 @@ sed -i 's/quiet //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 
 
-# Uncomment to get 10 inch display drivers loaded
-tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
-on_chroot <<EOF
-dkms add -m panel-ilitek-ili9881c/1.0
-dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
-dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
-EOF
+# # Uncomment to get 10 inch display drivers loaded
+# tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
+# on_chroot <<EOF
+# dkms add -m panel-ilitek-ili9881c/1.0
+# dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
+# dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.32-v8+
+# EOF
 
 
 on_chroot << EOF
-systemctl daemon-reload
+chmod a+x "${ROOTFS_DIR}/opt/Firoz/shell/firoz_shell"
 systemctl enable firoz.shell.service
 EOF
