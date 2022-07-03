@@ -41,11 +41,11 @@ EOF
 
 
 # # Disables hdmi on rpi
-# tar xvf files/vc4-1.0.tgz -C "${ROOTFS_DIR}/"
-# on_chroot <<EOF
-# dkms add -m vc4/1.0
-# dkms install -m vc4/1.0 -k 5.15.32-v8+
-# EOF
+tar xvf files/vc4-1.0.tgz -C "${ROOTFS_DIR}/"
+on_chroot <<EOF
+dkms add -m vc4/1.0
+dkms install -m vc4/1.0 -k 5.15.32-v8+
+EOF
 
 
 
