@@ -50,5 +50,6 @@ EOF
 
 
 on_chroot << EOF
+apt remove dhcpcd5
 systemctl enable firoz.shell.service
 EOF
