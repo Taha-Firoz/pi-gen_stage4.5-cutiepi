@@ -36,6 +36,10 @@ jobs:
       - name: Copy stage 4.5
         working-directory: ../pi-gen 
         run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
+      
+      - name: Check deps
+        working-directory: ../pi-gen 
+        run: cat ./stage2/02-net-tweaks/00-packages        
 
       - name: Run build
         working-directory: ../pi-gen 
