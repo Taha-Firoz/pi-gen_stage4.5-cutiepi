@@ -3,8 +3,8 @@ Description=Firoz Shell
 After=network.target
 
 [Service]
-Environment="FLUTTER_DRM_DEVICE=/dev/dri/card0"
-ExecStart=/opt/Firoz/shell/firoz_shell -b ./ -r 270
+Environment="FLUTTER_DRM_DEVICE=/dev/dri/card1"
+ExecStart=/opt/Firoz/shell/firoz_shell -b ./ -r 90
 Restart=always
 User=root
 
