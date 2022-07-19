@@ -1,1 +1,1 @@
-libxkbcommon-x11-0 libegl1-mesa libgl1-mesa-dri libdrm-dev libgbm-dev libinput-dev
+libxkbcommon-x11-0 libegl1-mesa libgl1-mesa-dri libdrm-dev libgbm-dev libinput-dev libsqlite3-dev
