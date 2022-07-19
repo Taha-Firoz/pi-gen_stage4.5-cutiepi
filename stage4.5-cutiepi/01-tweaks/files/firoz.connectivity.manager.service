@@ -1,0 +1,14 @@
+[Unit]
+Description=Firoz Connectivity Manager
+
+[Service]
+Type=dbus
+# Don't forget to add bus name or systemd crashes
+BusName=com.Firoz.Connectivity.Manager
+TimeoutStartSec=5
+Restart=always
+ExecStart=/opt/Firoz/connection_manager/firoz-connectivity-manager
+User=root
+
+[Install]
+WantedBy=multi-user.target
