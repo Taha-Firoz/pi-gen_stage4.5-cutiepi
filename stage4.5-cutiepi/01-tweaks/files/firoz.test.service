@@ -3,7 +3,7 @@ Description=Firoz Test UI
 
 [Service]
 Environment="FLUTTER_DRM_DEVICE=/dev/dri/card1"
-ExecStart=/opt/Firoz/test/test_ui -b ./ -r 90
+ExecStart=/opt/Firoz/test/test_ui -b ./ -r 270
 Restart=always
 # should be firoz but wpa-suplicant fucks
 User=root
