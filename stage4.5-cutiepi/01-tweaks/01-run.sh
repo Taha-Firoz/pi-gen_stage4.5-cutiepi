@@ -23,6 +23,9 @@ install -m 644 files/*.dtbo 			"${ROOTFS_DIR}/boot/overlays/"
 install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
+# Apply ts rotation matrix rule
+tar xvpf files/ts-rotate-270-cw-udev-rule.tar.gz -C "${ROOTFS_DIR}/"
+
 # Install shell
 install -m 444 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
 tar xvpf files/firoz_shell.tar.gz -C "${ROOTFS_DIR}/"
@@ -44,7 +47,6 @@ dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.56-v8+
 dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.56-v8+
 EOF
 
-
 # Disables hdmi on rpi
 tar xvf files/5.15.56-vc4-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
@@ -52,4 +54,6 @@ dkms add -m vc4/1.0
 dkms install -m vc4/1.0 -k 5.15.56-v8+
 EOF
 
-
+on_chroot << EOF
+systemctl enable firoz.shell.service
+EOF
