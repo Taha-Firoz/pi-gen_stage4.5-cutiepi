@@ -18,6 +18,9 @@ install -m 644 files/*.dtbo 			"${ROOTFS_DIR}/boot/overlays/"
 install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
+# Apply ts rotation matrix rule
+tar xvpf files/ts-rotate-270-cw-udev-rule.tar.gz -C "${ROOTFS_DIR}/"
+
 # Install test
 install -m 444 files/firoz.test.service 			"${ROOTFS_DIR}/etc/systemd/system"
 tar xvpf files/firoz_test.tar.gz -C "${ROOTFS_DIR}/"
