@@ -1,4 +1,18 @@
 #!/bin/bash -e
+check_kernel_version()
+{
+	if [ -z "${DKMS_VERSIONS}" ]
+	then
+		if [ 0 -lt `find ${ROOTFS_DIR}/usr/src -name linux-headers\* -type d | wc -l` ]
+		then
+			for fn in `cat ${ROOTFS_DIR}/usr/src/linux-headers*/include/config/kernel.release`
+			do
+				export DKMS_VERSIONS="${DKMS_VERSIONS} -k ${fn}"
+			done
+		fi
+		log "====> Kernel Version: '${DKMS_VERSIONS}'"
+	fi
+}
 
 on_chroot <<EOF
 for GRP in video input render; do
@@ -37,17 +51,19 @@ sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 # Uncomment to get 10 inch display drivers loaded
 tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
+check_kernel_version
 dkms add -m panel-ilitek-ili9881c/1.0
-dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.73-v8+
-dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.73-v8+
+dkms build -m panel-ilitek-ili9881c -v 1.0 $DKMS_VERSIONS
+dkms install -m panel-ilitek-ili9881c -v 1.0 $DKMS_VERSIONS
 EOF
 
 
 # # Disables hdmi on rpi
 tar xvf files/vc4-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
+check_kernel_version
 dkms add -m vc4/1.0
-dkms install -m vc4/1.0 -k 5.15.73-v8+
+dkms install -m vc4/1.0 $DKMS_VERSIONS
 EOF
 
 
