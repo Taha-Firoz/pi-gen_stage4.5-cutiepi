@@ -1,4 +1,5 @@
 #!/bin/bash -e
+on_chroot <<EOF
 check_kernel_version()
 {
 	if [ -z "${DKMS_VERSIONS}" ]
@@ -13,6 +14,8 @@ check_kernel_version()
 		log "====> Kernel Version: '${DKMS_VERSIONS}'"
 	fi
 }
+check_kernel_version
+EOF
 
 on_chroot <<EOF
 for GRP in video input render; do
