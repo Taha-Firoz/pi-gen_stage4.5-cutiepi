@@ -1,2 +1,3 @@
 cpufrequtils iio-sensor-proxy 
 dkms raspberrypi-kernel-headers ntp
+fake-hwclock
