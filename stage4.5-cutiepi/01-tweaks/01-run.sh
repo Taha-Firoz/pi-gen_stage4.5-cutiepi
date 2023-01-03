@@ -20,7 +20,7 @@ install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
 # Install shell
 # install -m 444 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
-# tar xvpf files/firoz_shell.tar.gz -C "${ROOTFS_DIR}/"
+tar xvpf files/firoz_shell.tar.gz -C "${ROOTFS_DIR}/"
 
 # Install connectivity manager
 # install -m 444 files/com.Firoz.Connectivity.Manager.conf 			"${ROOTFS_DIR}/etc/dbus-1/system.d"
