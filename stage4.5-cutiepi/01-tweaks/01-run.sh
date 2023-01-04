@@ -18,13 +18,13 @@ install -m 644 files/*.dtbo 			"${ROOTFS_DIR}/boot/overlays/"
 install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
+# Apply ts rotation matrix rule
+tar xvpf files/ts-rotate-270-cw-udev-rule.tar.gz -C "${ROOTFS_DIR}/"
+
 # Install shell
-# install -m 444 files/firoz.shell.service 			"${ROOTFS_DIR}/etc/systemd/system"
 tar xvpf files/firoz_shell.tar.gz -C "${ROOTFS_DIR}/"
 
 # Install connectivity manager
-# install -m 444 files/com.Firoz.Connectivity.Manager.conf 			"${ROOTFS_DIR}/etc/dbus-1/system.d"
-# install -m 444 files/firoz.connectivity.manager.service 			"${ROOTFS_DIR}/etc/systemd/system"
 tar xvpf files/connectivity_manager.tar.gz -C "${ROOTFS_DIR}/"
 
 # Install cloud connect
