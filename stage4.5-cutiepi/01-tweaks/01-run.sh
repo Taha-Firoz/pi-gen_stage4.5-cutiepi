@@ -44,8 +44,8 @@ sed -i 's/splash //'				"${ROOTFS_DIR}/boot/cmdline.txt"
 tar xvpf files/panel-10inch-ilitek-ili9881c-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
 dkms add -m panel-ilitek-ili9881c/1.0
-dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.76-v8+
-dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.76-v8+
+dkms build -m panel-ilitek-ili9881c -v 1.0 -k 5.15.84-v8+
+dkms install -m panel-ilitek-ili9881c -v 1.0 -k 5.15.84-v8+
 EOF
 
 
@@ -53,7 +53,7 @@ EOF
 tar xvf files/5.15.56-vc4-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
 dkms add -m vc4/1.0
-dkms install -m vc4/1.0 -k 5.15.76-v8+
+dkms install -m vc4/1.0 -k 5.15.84-v8+
 EOF
 
 
