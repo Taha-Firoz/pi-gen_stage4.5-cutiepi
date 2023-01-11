@@ -54,6 +54,7 @@ tar xvf files/5.15.56-vc4-1.0.tgz -C "${ROOTFS_DIR}/"
 on_chroot <<EOF
 dkms add -m vc4/1.0
 dkms install -m vc4/1.0 -k 5.15.84-v8+
+cat "${ROOTFS_DIR}/var/lib/dkms/vc4/1.0/build/make.log"
 EOF
 
 
