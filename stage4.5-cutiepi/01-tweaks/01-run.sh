@@ -18,6 +18,14 @@ install -m 644 files/*.dtbo 			"${ROOTFS_DIR}/boot/overlays/"
 install -m 755 files/cutoff 			"${ROOTFS_DIR}/usr/lib/systemd/system-shutdown/"
 install -m 755 files/cutiepi-mcuproxy 		"${ROOTFS_DIR}/usr/local/bin/"
 
+cp files/*.deb					"${ROOTFS_DIR}/tmp"
+
+on_chroot <<EOF
+dpkg -i /tmp/*.deb
+EOF
+
+
+
 # Apply ts rotation matrix rule
 tar xvpf files/ts-rotate-270-cw-udev-rule.tar.gz -C "${ROOTFS_DIR}/"
 
