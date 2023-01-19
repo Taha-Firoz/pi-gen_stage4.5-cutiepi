@@ -57,9 +57,10 @@ jobs:
       - name: Cache initial images
         if: steps.cached-images-restore.outputs.cache-hit != 'true'
         id: cached-images-save
+        working-directory: ../pi-gen 
         uses: actions/cache/save@v3
         with:
-          path: ../pi-gen/work
+          path: work
           key: ${{ steps.cached-images-restore.outputs.cache-primary-key }}
 
 
