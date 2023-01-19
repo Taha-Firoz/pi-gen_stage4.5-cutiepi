@@ -33,11 +33,10 @@ jobs:
           touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
           touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
-
       # Try to restore the work folder with intermediary images
       - name: Restore cached intermediary  images
         id: cached-images-restore
-      - uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v3
         with:
           path: ../pi-gen/work
           key: pigen-uptil-stage3-work
@@ -52,7 +51,7 @@ jobs:
       - name: Cache initial images
         if: steps.cached-images-restore.outputs.cache-hit != 'true'
         id: cached-images-save
-      - uses: actions/cache/save@v3
+        uses: actions/cache/save@v3
         with:
           path: ../pi-gen/work
           key: ${{ steps.cached-images-restore.outputs.cache-primary-key }}
