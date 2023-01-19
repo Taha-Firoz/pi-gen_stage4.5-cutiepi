@@ -33,13 +33,41 @@ jobs:
           touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
           touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
+
+      # Try to restore the work folder with intermediary images
+      - name: Restore cached intermediary  images
+        id: cached-images-restore
+      - uses: actions/cache/restore@v3
+        with:
+          path: ../pi-gen/work
+          key: pigen-uptil-stage3-work
+
+      # If cache hit fails rebuild images till stake3
+      - name: Rebuild initial images
+        if: steps.cached-images-restore.outputs.cache-hit != 'true'
+        working-directory: ../pi-gen 
+        run: sudo ./build.sh
+
+      # If hit fails cache rebuilt images 
+      - name: Cache initial images
+        if: steps.cached-images-restore.outputs.cache-hit != 'true'
+        id: cached-images-save
+      - uses: actions/cache/save@v3
+        with:
+          path: ../pi-gen/work
+          key: ${{ steps.cached-images-restore.outputs.cache-primary-key }}
+
+
+      - name: Disable stage 0, 1, 2 & 3
+        working-directory: ../pi-gen 
+        run: |
+          touch ./stage0/SKIP ./stage1/SKIP ./stage2/SKIP
+          touch ./stage2/SKIP_IMAGES ./stage3/SKIP_IMAGES
+
       - name: Copy stage 4.5
         working-directory: ../pi-gen 
         run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
-      
-      - name: Check deps
-        working-directory: ../pi-gen 
-        run: cat ./stage2/02-net-tweaks/00-packages        
+
 
       - name: Run build
         working-directory: ../pi-gen 
