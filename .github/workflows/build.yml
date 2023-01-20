@@ -12,12 +12,6 @@ jobs:
 
       - name: Checkout branch
         uses: actions/checkout@master
-      
-      - name: pwd
-        run: pwd
-
-      - name: ls
-        run: ls
 
       - name: Install dependencies
         run: |
@@ -45,7 +39,7 @@ jobs:
         id: cached-images-restore
         uses: actions/cache/restore@v3
         with:
-          path: /home/runner/work/pi-gen/work
+          path: /home/runner/work/pi-gen_stage4.5-cutiepi/pi-gen/work
           key: pigen-uptil-stage3-work
 
       # If cache hit fails copy config
@@ -66,7 +60,7 @@ jobs:
         id: cached-images-save
         uses: actions/cache/save@v3
         with:
-          path: /home/runner/work/pi-gen/work
+          path: /home/runner/work/pi-gen_stage4.5-cutiepi/pi-gen/work
           key: ${{ steps.cached-images-restore.outputs.cache-primary-key }}
 
 
@@ -85,11 +79,7 @@ jobs:
         working-directory: ../pi-gen 
         run: sudo ./build.sh
 
-      - name: Run build
-        working-directory: ../pi-gen/deploy
-        run: ls
-
-      - name: Run build
+      - name: Move build image
         working-directory: ../pi-gen/deploy
         run: sudo mv *.img.xz ../../pi-gen_stage4.5-cutiepi/image_build.img.xz
 
