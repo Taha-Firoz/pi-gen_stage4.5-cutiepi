@@ -12,6 +12,12 @@ jobs:
 
       - name: Checkout branch
         uses: actions/checkout@master
+      
+      - name: pwd
+        run: pwd
+
+      - name: ls
+        run: ls
 
       - name: Install dependencies
         run: |
