@@ -32,54 +32,16 @@ jobs:
         run: |
           touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
           touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
-          mkdir ./work
-
-      # Try to restore the work folder with intermediary images
-      - name: Restore cached intermediary  images
-        id: cached-images-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: /home/runner/work/pi-gen_stage4.5-cutiepi/pi-gen/work
-          key: pigen-uptil-stage3-work
-
-      # If cache hit fails copy config
-      - name: Copy stage 4.5
-        if: steps.cached-images-restore.outputs.cache-hit != 'true'
-        working-directory: ../pi-gen 
-        run: mv ../pi-gen_stage4.5-cutiepi/config2 ./config
-
-      # If cache hit fails rebuild images till stake3
-      - name: Rebuild initial images
-        if: steps.cached-images-restore.outputs.cache-hit != 'true'
-        working-directory: ../pi-gen 
-        run: sudo ./build.sh
-
-      # If hit fails cache rebuilt images 
-      - name: Cache initial images
-        if: steps.cached-images-restore.outputs.cache-hit != 'true'
-        id: cached-images-save
-        uses: actions/cache/save@v3
-        with:
-          path: /home/runner/work/pi-gen_stage4.5-cutiepi/pi-gen/work
-          key: ${{ steps.cached-images-restore.outputs.cache-primary-key }}
-
-
-      - name: Disable stage 0, 1, 2 & 3
-        working-directory: ../pi-gen 
-        run: |
-          touch ./stage0/SKIP ./stage1/SKIP ./stage2/SKIP
-          touch ./stage2/SKIP_IMAGES ./stage3/SKIP_IMAGES
 
       - name: Copy stage 4.5
         working-directory: ../pi-gen 
         run: cp ../pi-gen_stage4.5-cutiepi/stage4.5-cutiepi ../pi-gen_stage4.5-cutiepi/config -a .
-
-
+      
       - name: Run build
         working-directory: ../pi-gen 
         run: sudo ./build.sh
 
-      - name: Move build image
+      - name: Package image
         working-directory: ../pi-gen/deploy
         run: sudo mv *.img.xz ../../pi-gen_stage4.5-cutiepi/image_build.img.xz
 
