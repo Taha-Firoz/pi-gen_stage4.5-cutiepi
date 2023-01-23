@@ -65,8 +65,8 @@ EOF
 
 
 
-systemctl enable firoz.shell.service
 on_chroot << EOF
+systemctl enable firoz.shell.service
 systemctl enable firoz.connectivity.manager.service
 systemctl enable firoz.cloud.connect.service
 EOF
