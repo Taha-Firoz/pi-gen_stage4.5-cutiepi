@@ -1,9 +1,7 @@
-IMG_NAME=raspios-cutiepi
+IMG_NAME=patient-build
 DEPLOY_COMPRESSION=xz
 STAGE_LIST="stage0 stage1 stage2 stage4.5-cutiepi"
-ENABLE_SSH=1 
-LOCALE_DEFAULT="en_US.UTF-8" 
+LOCALE_DEFAULT="en_US.UTF-8"
 TIMEZONE_DEFAULT="America/Chicago"
-FIRST_USER_PASS="hunter2"
 FIRST_USER_NAME="pro"
 TARGET_HOSTNAME="prosilient"
